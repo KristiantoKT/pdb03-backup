@@ -1,0 +1,122 @@
+version: '3.3'
+services:
+  # api-pdb03:
+  #   container_name: api-pdb03
+  #   build: .
+  #   image: kristiantokt/api-pdb03
+  #   ports:
+  #     - "3000:3000"
+  #     - "9229:9229"
+  #   environment:
+  #     - NODE_ENV=local
+  #     - ES_HOST=es01-pdb03
+  #     - PORT=3000
+  #   volumes:
+  #     - ./crasher:/usr/src/app/crashes
+
+  # frontend:
+  #   container_name: pdb-frontend
+  #   image: nginx
+  #   volumes:
+  #     - ./public:/usr/share/nginx/html
+  #   ports:
+  #     - "8080:80"
+  
+  frontend-pdb03:
+    container_name: frontend-pdb03
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - '3000:3000'
+    environment:
+      # - NODE_ENV=development
+      - NODE_ENV=local
+      - ES_HOST=es01-pdb03
+      - PORT=3000
+
+      
+  # frontend-pdb03-prod:
+  #   container_name: frontend-pdb03-prod
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - '80:80'
+
+  es01-pdb03:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.2
+    container_name: es01-pdb03
+    environment:
+      - node.name=es01-pdb03
+      - cluster.name=es-pdb03
+      # - discovery.seed_hosts=es02-pdb03,es03-pdb03
+      # - cluster.initial_master_nodes=es01-pdb03,es02-pdb03,es03-pdb03
+      - discovery.seed_hosts=es02-pdb03
+      - cluster.initial_master_nodes=es01-pdb03,es02-pdb03
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - data01-pdb03:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - elastic
+
+  es02-pdb03:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.2
+    container_name: es02-pdb03
+    environment:
+      - node.name=es02-pdb03
+      - cluster.name=es-pdb03
+      # - discovery.seed_hosts=es01-pdb03,es03-pdb03
+      # - cluster.initial_master_nodes=es01-pdb03,es02-pdb03,es03-pdb03
+      - discovery.seed_hosts=es01-pdb03
+      - cluster.initial_master_nodes=es01-pdb03,es02-pdb03
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - data02-pdb03:/usr/share/elasticsearch/data
+    networks:
+      - elastic
+  # es03-pdb:
+  #   image: docker.elastic.co/elasticsearch/elasticsearch:7.4.2
+  #   container_name: es03-pdb03
+  #   environment:
+  #     - node.name=es03-pdb03
+  #     - cluster.name=es-pdb03
+  #     - discovery.seed_hosts=es01-pdb03,es02-pdb03
+  #     - cluster.initial_master_nodes=es01-pdb03,es02-pdb03,es03-pdb03
+  #     - bootstrap.memory_lock=true
+  #     - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  #   ulimits:
+  #     memlock:
+  #       soft: -1
+  #       hard: -1
+  #   volumes:
+  #     - data03-pdb03:/usr/share/elasticsearch/data
+  #   networks:
+  #     - elastic
+
+volumes:
+  data01-pdb03:
+    driver: local
+  data02-pdb03:
+    driver: local
+  # data03-pdb03:
+  #   driver: local
+  
+networks:
+  elastic:
+    driver: bridge
