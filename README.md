@@ -1,68 +1,30 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Dashboard and Search Feature using Elasticsearch
 
-## Available Scripts
+## Repository Proyek Akhir Pengelolaan Data Besar (CSIE604273) Semester Gasal TA 2019/2020
+Kelompok 3:
+- Faris Abdurrahman (1706106734)
+- Kristianto (1606889856)
+- Shafira Fitri (1606890385)
+- Thrisnadevany Amalia (1606874532)
 
-In the project directory, you can run:
+## Teknologi dan Data yang Digunakan
+Teknologi yang digunakan pada proyek akhir ini di antaranya adalah:
+- Elasticsearch (sebagai teknologi yang dipilih)
+- React
+- Docker
 
-### `yarn start`
+Data yang digunakan pada proyek akhir ini adalah hasil ekstraksi dari data `NYPD Motor Vehicle Collisions - Crashes` yang diperoleh dari [NYC Open Data](https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Panduan Instalasi
+Untuk melihat demonstrasi dari proyek akhir ini secara `local`, lakukan `git clone` terlebih dahulu. Selain itu, pastikan juga bahwa `local` Anda sudah memiliki `docker` dan `docker-compose`. Jika belum, harap meng-install keduanya terlebih dahulu.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Sebelum menjalankan program, lakukan perintah `sysctl -w vm.max_map_count=262144` terlebih dahulu. Perintah tersebut dilakukan agar Elasticsearch dapat berjalan dengan baik.
 
-### `yarn test`
+Selanjutnya, lakukan perintah berikut untuk menjalankan program:
+```
+docker-compose build
+docker-compose up
+```
+Setelah berhasil, program dapat diakses melalui `http://localhost:3000` (untuk React) dan `http://localhost:9200` (untuk Elasticsearch).
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Jika sudah selesai, lakukan `docker-compose down` untuk mematikan program.
