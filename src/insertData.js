@@ -2,7 +2,7 @@ const axios = require('axios');
 const fs = require('fs');
 
 let read_data = () => {
-    let raw = fs.readFileSync('../data/crashes.json');
+    let raw = fs.readFileSync('data/crashes.json');
     let data = JSON.parse(raw);
     return data
 }
