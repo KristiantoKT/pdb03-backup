@@ -27,4 +27,6 @@ docker-compose up
 ```
 Setelah berhasil, program dapat diakses melalui `http://localhost:3000` (untuk React) dan `http://localhost:9200` (untuk Elasticsearch).
 
+Untuk memasukkan data yang ada ke dalam Elasticsearch, jalankan perintah `node src/insertData.js` dari root directory. Proses memasukkan data akan memakan waktu sekitar 30 menit. Proses ini hanya perlu dilakukan sekali di awal.
+
 Jika sudah selesai, lakukan `docker-compose down` untuk mematikan program.
