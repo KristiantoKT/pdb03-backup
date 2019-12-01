@@ -4,7 +4,7 @@ import './App.css';
 import axios from 'axios';
 
 async function elasticsearch() {
-  const response = await axios.get('http://localhost:9200/');
+  const response = await axios.get('http://35.193.23.202:9200/');
   console.log(response);
 }
 
