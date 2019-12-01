@@ -10,23 +10,7 @@ import {
 
 } from "@appbaseio/reactivesearch";
 import "./App.css";
-import moment from "moment";
-import { DateUtils } from "react-day-picker";
-import dateFnsFormat from "date-fns/format";
-import dateFnsParse from "date-fns/parse";
 import Maps from './components/Maps';
-
-function parseDate(str, format, locale) {
-  const parsed = dateFnsParse(str, format, { locale });
-  if (DateUtils.isDate(parsed)) {
-    return parsed;
-  }
-  return undefined;
-}
-
-function formatDate(date, format, locale) {
-  return dateFnsFormat(date, format, { locale });
-}
 
 class App extends Component {
   constructor(props) {
@@ -45,32 +29,7 @@ class App extends Component {
     });
   }
 
-  dateQuery(value) {
-    let query = null;
-    if (value) {
-      query = [
-        {
-          range: {
-            date_from: {
-              gte: moment(value.start).format("YYYYMMDD")
-            }
-          }
-        },
-        {
-          range: {
-            date_to: {
-              lte: moment(value.end).format("YYYYMMDD")
-            }
-          }
-        }
-      ];
-    }
-    return query ? { query: { bool: { must: query } } } : null;
-  }
-
-
   render() {
-    const FORMAT = "MM/dd/yyyy";
     return (
       <div className="main-container">
         <ReactiveBase
@@ -238,26 +197,27 @@ class App extends Component {
                 componentId="Crash Range Date"
                 dataField={["ACCIDENT DATE"]}
                 title="DateRange"
-                placeholder={{
-                  start: 'Start Date',
-                  end: 'End Date',
-                }}
-                dayPickerInputProps={{
-                  formatDate,
-                  format: FORMAT,
-                  parseDate
-                }}
-                dataField="date_from"
-                customQuery={this.dateQuery}
-                initialMonth={new Date()}
-                react={{
-                  "and": ["Location",
-                    "Number of Person Injured",
-                    "Number of Person Killed",
-                    "Vehicle Type",
-                    "Crash Factor",
-                  ]
-                }}
+                // placeholder={{
+                //   start: 'Start Date',
+                //   end: 'End Date',
+                // }}
+                // dayPickerInputProps={{
+                //   formatDate,
+                //   format: FORMAT,
+                //   parseDate
+                // }}
+                // dataField="date_from"
+                // dataField=
+                // customQuery={this.dateQuery}
+                // initialMonth={new Date()}
+                // react={{
+                //   "and": ["Location",
+                //     "Number of Person Injured",
+                //     "Number of Person Killed",
+                //     "Vehicle Type",
+                //     "Crash Factor",
+                //   ]
+                // }}
               />
             </div>
 
