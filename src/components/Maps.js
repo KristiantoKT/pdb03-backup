@@ -51,7 +51,7 @@ export default class Maps extends Component {
     }
   }
   async componentDidMount() {
-    await axios.get('http://35.193.23.202:9200/crash/_search?size=1000')
+    await axios.get('http://35.193.23.202:9200/accident/_search?size=500')
     .then((response) => {
         this.setState({crashes : response.data.hits.hits});
     });
