@@ -2,7 +2,7 @@ const axios = require('axios');
 const fs = require('fs');
 
 let create_index = async () => {
-    const URL = 'http://localhost:9200/crash'
+    const URL = 'http://localhost:9200/accident'
     const body = {
         "settings": {
             "number_of_shards": 3,
@@ -25,9 +25,11 @@ let read_data = () => {
 }
 
 let post_data = async (data) => {
-    const URL = 'http://localhost:9200/crash/_doc/'    
+    const URL = 'http://localhost:9200/accident/_doc/'    
     for(let i = 0; i < data.length; i++) {
         let data_i = data[i];
+        let temp_date = data_i['ACCIDENT DATE'].split("/")
+        data_i['ACCIDENT DATE'] = temp_date[2] + "-" + temp_date[0] + "-" + temp_date[1]
         await axios.post(URL + i, data_i)
         .catch((error) => {
             console.log(error);
