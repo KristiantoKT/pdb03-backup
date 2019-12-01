@@ -1,11 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+// import { ReactiveBase, DataSearch, SelectedFilters, ReactiveList } from '@appbaseio/reactivesearch';
+import Maps from './components/Maps';
 
 async function elasticsearch() {
-  const response = await axios.get('http://35.193.23.202:9200/');
-  console.log(response);
+  await axios.get('http://35.193.23.202:9200/')
+  .then((response) => {
+    console.log(response);
+  })
 }
 
 class App extends React.Component{
@@ -13,24 +16,21 @@ class App extends React.Component{
     elasticsearch();
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Maps />
+        {/* <ReactiveBase app="crash" url="http://35.193.23.202:9200">
+          <DataSearch componentId="Borough" dataField={["BOROUGH"]}/>
+          <SelectedFilters />
+          <ReactiveList
+              componentId="SearchResult"
+              react={{
+                  "and": ["Borough"]
+              }}
+              renderItem={(res) => <div>{res['ACCIDENT DATE']}</div>}
+          />
+        </ReactiveBase> */}
       </div>
     );
   }
 }
-
 
 export default App;
