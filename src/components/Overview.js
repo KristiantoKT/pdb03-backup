@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import Maps from "./Maps";
 import axios from "axios";
-
-const getTotalData = async () => {
-		const response = await axios.get('http://35.193.23.202:9200/accident/_search');
-		console.log(response)
-    return response.data.hits.total.value;
-}
+import BoroughChart from "./BoroughChart";
 
 export default class Overview extends Component {
 	constructor(props) {
@@ -47,6 +42,7 @@ export default class Overview extends Component {
 					</div>
 					<div className="row">
 						<div className="col-md-3">
+							<BoroughChart />
 
 						</div>
 					</div>
