@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import Overview from './components/Overview';
+import Searching from './components/Searching'
 import {
   ReactiveBase,
   DataSearch,
@@ -32,9 +35,19 @@ class App extends Component {
 
   render() {
     return (
+      <Router>
       <div className="app">
-        <Nav />
-        <div className="overview-container">
+        {/* <Nav /> */}
+        <nav className="navbar fixed-top navbar-expand-lg">
+            <a className="navbar-brand" href="#"><img className="navbar-logo" src="../NYPD.png" alt=""></img> NYPD CrashSearch - Search Crash in NYC</a>
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul className="navbar-nav mr-auto">
+                    <li><Link to={'/'} className="nav-link">Overview</Link></li>
+                    <li><Link to={'/search'} className="nav-link">Search</Link></li>
+                </ul>
+            </div>
+        </nav>
+        {/* <div className="overview-container">
           <div className="row">
             <div className="col-md-12">
               <h2 className="section-title">Crash Overview</h2>
@@ -273,8 +286,13 @@ class App extends Component {
               </div>
             </div>
           </ReactiveBase >
-        </div >
+        </div > */}
+        <Switch>
+          <Route exact path="/" component={Overview} />
+          <Route path="/search" component={Searching} />
+        </Switch>
       </div>
+      </Router>
     );
   }
 }

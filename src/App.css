@@ -27,30 +27,46 @@ hr {
   text-align: center;
 }
 
-/* styling for header */
+/* Navbar Styling */
 
-.navbar {
-  background-color: #333;
+.navbar {  
+  background-image: linear-gradient(to bottom right, #5B86E5, #36D1DC);
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: flex-start;
-  color: #fff;
-  -webkit-box-shadow: 9px 10px 20px -10px #86ddf8;
-  box-shadow: 0 0 10px 0 #86ddf8;
+  -webkit-box-shadow: 0px 0px 10px 0px #333;
+  box-shadow: 0 0 10px 0 #333;
 }
 
 .navbar-title {
   font-weight: 600;
   margin-left: 15px;
-  
 }
 
 .navbar-logo {
-  width: 80px;
+  width: 45px;
 }
 
+.navbar-brand {
+  font-weight: 600;
+  color: #fff;
+}
 
+.navbar-brand:hover {
+  color: #fff;
+}
+
+.nav-link {
+  color: #fff;
+  font-size: 18px;
+}
+
+.nav-link:hover {
+  color: #fff;
+}
+
+/* */
 .search-container {
   width: 50%;
 }
@@ -61,9 +77,15 @@ hr {
 }
 
 /* Overview Section */
-.overview-container {
-  margin: 20px 10px;
+#overviewContainer {
+  margin-top: 120px;
+  /* margin: 20px 10px; */
 }
+
+.card-overview {
+  text-align: center;
+}
+/* */
 
 .section-title {
   font-weight: 600;
