@@ -1,5 +1,5 @@
 .main-container {
-  margin: 0 10px;
+  margin: 10px 10px;
 }
 
 .sub-container {
@@ -9,6 +9,11 @@
   flex-direction: row;
   -ms-flex-pack: center;
   justify-content: center;
+}
+
+.navbar-logo {
+  width: 100px;
+
 }
 
 a:link {
@@ -35,8 +40,12 @@ hr {
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: flex-start;
-  padding-left: 0px;
-  padding-right: 0px;
+  color: #fff;
+}
+
+.navbar-title {
+  /* color: white; */
+  font-weight: 600;
 }
 
 .logo-container {
