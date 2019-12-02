@@ -6,9 +6,8 @@ import {
     DateRange,
     SelectedFilters,
     NumberBox,
-    ReactiveList,
-  
-  } from "@appbaseio/reactivesearch";
+		ReactiveList
+} from "@appbaseio/reactivesearch";
 
 class Searching extends Component {
     constructor(props) {
@@ -25,29 +24,30 @@ class Searching extends Component {
         isClicked: !this.state.isClicked,
         message: this.state.isClicked ? "🔬 Show Filters" : "Show Maps"
     });
-    }
+		}
 
     render() {
         return (
         <div className="container" id="searchContainer">
-					<ReactiveBase app="accident" url="http://35.193.23.202:9200" 
-					// theme={{
-					// 	colors: {
-					// 		// textColor: "#000",
-					// 		// backgroundColor: "#212121",
-					// 		primaryTextColor: "#fff",
-					// 		primaryColor: "#2196F3",
-					// 		titleColor: "#fff",
-					// 		alertColor: "#d9534f",
-					// 		borderColor: "#666"
-					// 	}
-					// }}
-					>
-						<div className="row">
-							<div className="col-md-12">
-								<h2 className="section-title">Crash Data Search</h2>
-							</div>
+					<div className="row">
+						<div className="col-md-12">
+							<h2 className="page-title">Crash Data Search</h2>
 						</div>
+					</div>
+					<ReactiveBase app="accident" url="http://35.193.23.202:9200" 
+					theme={{
+						typography: {
+							fontFamily:
+								'"Open Sans", sans-serif',
+							fontSize: "16px"
+						},
+						colors: {
+							primaryTextColor: "#5B86E5",
+							primaryColor: "#2196F3",
+						}
+					}}
+					>
+						
             <div className="row">
               <div className="col-md-4">
                 <div
@@ -79,7 +79,7 @@ class Searching extends Component {
                     }}
                     className="numberFilter"
                   />
-                  <hr className="blue" />
+                  <hr />
                   <div className="filter-heading center">
                     <b>
                       {" "}
@@ -106,7 +106,7 @@ class Searching extends Component {
                     className="numberFilter"
                   />
 
-                  <hr className="blue" />
+                  <hr />
                   <div className="filter-heading center">
                     <b>
                       <i className="fa fa-star" /> Vehicle Type
@@ -228,16 +228,19 @@ class Searching extends Component {
                       "Crash Range Date"
 
                     ]
-                  }}
-                  renderItem={(res) =>
-                    <div className="card search-result-card">
+									}}
+									renderItem={(res) =>
+                    <div className="card search-result-card" key={res['COLLISION_ID']}>
                       <div className="card-body">
-                        <h3 className="card-title">Collision ID: {res['COLLISION_ID']}</h3>
-                        <h6 className="card-subtitle">Happened: {res['ACCIDENT DATE']}, {res['ACCIDENT TIME']}</h6>
-                        <p>{res["ON STREET NAME"] + " " + res["CROSS STREET NAME"] + " " + res["OFF STREET NAME"] + ", " + res["BOROUGH"]}</p>
-                        <p>{res["NUMBER OF PERSONS INJURED"] + " person injured, " + res["NUMBER OF PERSONS KILLED"] + " person killed"}</p>
+                        <h4 className="card-title search-result-card-title">Collision ID #{res['COLLISION_ID']}</h4>
+                        <p className="card-subtitle search-result-card-subtitle">Happened on {res['ACCIDENT DATE']} at {res['ACCIDENT TIME']}</p>
+                        <p className="card-text">
+													<span className="search-result-address">Address: {res["OFF STREET NAME"] || res["ON STREET NAME"] || res["CROSS STREET NAME"]}</span><br></br>
+													<span className="search-result-borough">Borough: {res["BOROUGH"] || "UNDEFINED"}</span><br></br>
+													<span className="search-result-casualities">{res["NUMBER OF PERSONS INJURED"] + " person injured and " + res["NUMBER OF PERSONS KILLED"] + " person killed"}</span><br></br>
+													<span className="search-result-caused-by">Incident was caused by: {res["CONTRIBUTING FACTOR VEHICLE 1"]}</span>
+												</p>										
                       </div>
-                      <hr></hr>
                     </div>}
                 />
               </div>
