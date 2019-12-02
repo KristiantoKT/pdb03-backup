@@ -34,6 +34,21 @@ class App extends Component {
     return (
       <div className="app">
         <Nav />
+        <div className="overview-container">
+          <div className="row">
+            <div className="col-md-12">
+              <h2 className="section-title">Crash Overview</h2>
+            </div>
+            <div className="col-md-6 overview-subtitle">
+              <h3>Crash Infographic</h3>
+            </div>
+            <div className="col-md-6 crash-map overview-subtitle">
+              <h3>Crash Map</h3>
+              <Maps />
+            </div>
+          </div>
+        </div>
+
         <div className="main-container">
           <ReactiveBase
             app="accident"
@@ -55,17 +70,146 @@ class App extends Component {
               }
             }}
           >
-            {/* <div className="navbar">
-              <div className="logo-container">
-                <h1>NYPD CrashSearch</h1>
+            <div className="row">
+              <div className="col-md-12">
+                <h2 className="section-title">Crash Search</h2>
               </div>
+              <div className="col-md-3">
+                <div
+                  className={
+                    this.state.isClicked ? "left-bar-optional" : "left-bar"
+                  }
+                >
+                  <div className="filter-heading center">
+                    <b>
+                      {" "}
+                      <i className="fa fa-pied-piper-alt" /> Person Injured{" "}
+                    </b>
+                  </div>
+                  <NumberBox
+                    componentId="Number of Person Injured"
+                    dataField={["NUMBER OF PERSONS INJURED"]}
+                    defaultValue={0}
+                    data={{
+                      start: 0,
+                      end: 16
+                    }}
+                    react={{
+                      "and": ["Location",
+                        "Number of Person Killed",
+                        "Vehicle Type",
+                        "Crash Factor",
+                        "Crash Range Date"
+                      ]
+                    }}
+                    className="numberFilter"
+                  />
+                  <hr className="blue" />
+                  <div className="filter-heading center">
+                    <b>
+                      {" "}
+                      <i className="fa fa-dollar" /> Person Killed{" "}
+                    </b>
+                  </div>
+                  <NumberBox
+                    componentId="Number of Person Killed"
+                    dataField={["NUMBER OF PERSONS KILLED"]}
+                    defaultValue={0}
+                    labelPosition="left"
+                    data={{
+                      start: 0,
+                      end: 16
+                    }}
+                    react={{
+                      "and": ["Location",
+                        "Number of Person Injured",
+                        "Vehicle Type",
+                        "Crash Factor",
+                        "Crash Range Date"
+                      ]
+                    }}
+                    className="numberFilter"
+                  />
 
-            </div> */}
-              <div className="search-container">
+                  <hr className="blue" />
+                  <div className="filter-heading center">
+                    <b>
+                      <i className="fa fa-star" /> Vehicle Type
+                    </b>
+                  </div>
+                  <MultiList
+                    componentId="Vehicle Type"
+                    dataField={"VEHICLE TYPE CODE 1.keyword",
+                      "VEHICLE TYPE CODE 2.keyword"
+                    }
+                    sortBy="asc"
+                    queryFormat="or"
+                    selectAllLabel="All vehicle type"
+                    placeholder="Search for vehicle type"
+                    react={{
+                      "and": ["Location",
+                        "Number of Person Injured",
+                        "Number of Person Killed",
+                        "Crash Factor",
+                        "Crash Range Date"
+                      ]
+                    }}
+                  />
+
+                  <hr className="blue" />
+                  <div className="filter-heading center">
+                    <b>
+                      <i className="fa fa-star" /> Crash Factor
+                    </b>
+                  </div>
+                  <MultiList
+                    componentId="Crash Factor"
+                    dataField={"CONTRIBUTING FACTOR VEHICLE 1.keyword",
+                      "CONTRIBUTING FACTOR VEHICLE 2.keyword"
+                    }
+                    sortBy="asc"
+                    queryFormat="or"
+                    selectAllLabel="All crash factor"
+                    placeholder="Search for crash factor"
+                    react={{
+                      "and": ["Location",
+                        "Number of Person Injured",
+                        "Number of Person Killed",
+                        "Vehicle Type",
+                        "Crash Range Date"
+                      ]
+                    }}
+                  />
+
+                  <hr className="blue" />
+                  <div className="filter-heading center">
+                    <b>
+                      <i className="fa fa-star" /> Crash Date Range
+                    </b>
+                  </div>
+                  <DateRange
+                    componentId="Crash Range Date"
+                    dataField={["ACCIDENT DATE"]}
+                    placeholder={{
+                      start: 'Start Date',
+                      end: 'End Date',
+                    }}
+                    react={{
+                      "and": ["Location",
+                        "Number of Person Injured",
+                        "Number of Person Killed",
+                        "Vehicle Type",
+                        "Crash Factor",
+                      ]
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="col-md-9">
                 <DataSearch
                   componentId="Location"
                   dataField={["BOROUGH", "ON STREET NAME", "OFF STREET NAME", "CROSS STREET NAME"]}
-                  placeholder="Search location of crash..."
+                  placeholder="Search location of crash (by Borough or Street Name)"
                   react={{
                     "and": [
                       "Number of Person Injured",
@@ -76,161 +220,13 @@ class App extends Component {
                     ]
                   }}
                 />
-                <SelectedFilters />
-              </div>
-
-
-            <div className="sub-container">
-              <div
-                className={
-                  this.state.isClicked ? "left-bar-optional" : "left-bar"
-                }
-              >
-                <div className="filter-heading center">
-                  <b>
-                    {" "}
-                    <i className="fa fa-pied-piper-alt" /> Person Injured{" "}
-                  </b>
-                </div>
-                <NumberBox
-                  componentId="Number of Person Injured"
-                  dataField={["NUMBER OF PERSONS INJURED"]}
-                  title="Person Injured"
-                  defaultValue={0}
-                  labelPosition="right"
-                  data={{
-                    start: 0,
-                    end: 16
-                  }}
-                  react={{
-                    "and": ["Location",
-                      "Number of Person Killed",
-                      "Vehicle Type",
-                      "Crash Factor",
-                      "Crash Range Date"
-                    ]
-                  }}
-                  className="numberFilter"
-                />
-                <hr className="blue" />
-                <div className="filter-heading center">
-                  <b>
-                    {" "}
-                    <i className="fa fa-dollar" /> Person Killed{" "}
-                  </b>
-                </div>
-                <NumberBox
-                  componentId="Number of Person Killed"
-                  dataField={["NUMBER OF PERSONS KILLED"]}
-                  title="Person Killed"
-                  defaultValue={0}
-                  labelPosition="right"
-                  data={{
-                    start: 0,
-                    end: 16
-                  }}
-                  react={{
-                    "and": ["Location",
-                      "Number of Person Injured",
-                      "Vehicle Type",
-                      "Crash Factor",
-                      "Crash Range Date"
-                    ]
-                  }}
-                  className="numberFilter"
-                />
-
-                <hr className="blue" />
-                <div className="filter-heading center">
-                  <b>
-                    <i className="fa fa-star" /> Vehicle Type
-                  </b>
-                </div>
-                <MultiList
-                  componentId="Vehicle Type"
-                  dataField={"VEHICLE TYPE CODE 1.keyword",
-                    "VEHICLE TYPE CODE 2.keyword"
+                <div
+                  className={
+                    this.state.isClicked
+                      ? "result-container-optional"
+                      : "result-container"
                   }
-                  sortBy="asc"
-                  queryFormat="or"
-                  selectAllLabel="All vehicle type"
-                  placeholder="Search for vehicle type"
-                  react={{
-                    "and": ["Location",
-                      "Number of Person Injured",
-                      "Number of Person Killed",
-                      "Crash Factor",
-                      "Crash Range Date"
-                    ]
-                  }}
-                />
-
-                <hr className="blue" />
-                <div className="filter-heading center">
-                  <b>
-                    <i className="fa fa-star" /> Crash Factor
-                  </b>
-                </div>
-                <MultiList
-                  componentId="Crash Factor"
-                  dataField={"CONTRIBUTING FACTOR VEHICLE 1.keyword",
-                    "CONTRIBUTING FACTOR VEHICLE 2.keyword"
-                  }
-                  sortBy="asc"
-                  queryFormat="or"
-                  selectAllLabel="All crash factor"
-                  placeholder="Search for crash factor"
-                  react={{
-                    "and": ["Location",
-                      "Number of Person Injured",
-                      "Number of Person Killed",
-                      "Vehicle Type",
-                      "Crash Range Date"
-                    ]
-                  }}
-                />
-
-                <hr className="blue" />
-                <div className="filter-heading center">
-                  <b>
-                    <i className="fa fa-star" /> Crash Date
-                  </b>
-                </div>
-                <DateRange
-                  componentId="Crash Range Date"
-                  dataField={["ACCIDENT DATE"]}
-                  title="DateRange"
-                  // placeholder={{
-                  //   start: 'Start Date',
-                  //   end: 'End Date',
-                  // }}
-                  // dayPickerInputProps={{
-                  //   formatDate,
-                  //   format: FORMAT,
-                  //   parseDate
-                  // }}
-                  // dataField="date_from"
-                  // dataField=
-                  // customQuery={this.dateQuery}
-                  // initialMonth={new Date()}
-                  // react={{
-                  //   "and": ["Location",
-                  //     "Number of Person Injured",
-                  //     "Number of Person Killed",
-                  //     "Vehicle Type",
-                  //     "Crash Factor",
-                  //   ]
-                  // }}
-                />
-              </div>
-
-              <div
-                className={
-                  this.state.isClicked
-                    ? "result-container-optional"
-                    : "result-container"
-                }
-              >
+                >
                 <SelectedFilters
                   showClearAll={true}
                   clearAllLabel="Clear filters"
@@ -241,7 +237,6 @@ class App extends Component {
                   pagination
                   paginationAt="bottom"
                   size={15}
-                  // sortBy="desc"
                   sortOptions={
                     [
                       {label: "Accident Date (Descending)", dataField: "ACCIDENT DATE", sortBy:"desc"},
@@ -259,17 +254,15 @@ class App extends Component {
 
                     ]
                   }}
+                  // render={({ data })}
                   renderItem={(res) =>
                     <div>{res['COLLISION_ID']}, {res['ACCIDENT DATE']}, {res['ACCIDENT TIME']}</div>}
                 />
               </div>
-
-              <button
-                className="toggle-button"
-                onClick={this.handleClick.bind(this)}
-              >
+              <button className="toggle-button" onClick={this.handleClick.bind(this)}>
                 {this.state.message}
               </button>
+              </div>
             </div>
           </ReactiveBase >
         </div >
