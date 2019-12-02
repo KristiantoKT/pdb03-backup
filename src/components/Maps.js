@@ -30,8 +30,8 @@ const MapWithAMarker = compose(withScriptjs, withGoogleMap)(props => {
             {props.selectedMarker === marker &&
               <InfoWindow>
                 <div>
-                    <b>Collision ID: {markerData['COLLISION_ID']}</b><br></br>
-                    Accident Date & Time: {markerData['ACCIDENT DATE']}, {markerData['ACCIDENT TIME']}
+                    <b>Collision ID #{markerData['COLLISION_ID']}</b><br></br>
+                    Happened on {markerData['ACCIDENT DATE']} at {markerData['ACCIDENT TIME']}
                 </div>
               </InfoWindow>
             }

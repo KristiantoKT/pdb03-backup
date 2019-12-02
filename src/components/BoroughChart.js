@@ -39,7 +39,7 @@ class BoroughChart extends Component {
 	}
     
     render() {
-        const colors = ['#0088FE', '#00C49F', '#FFBB28', '#BB2233', "#12BB31", "#489ABC"];
+        const colors = ['#003f5c', '#444e86', '#955196', '#dd5182', "#ff6e54", "#ffa600"];
         
         // Change "" to UNDEFINED
         for(let i = 0; i < this.state.borough.length; i++) {

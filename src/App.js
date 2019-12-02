@@ -39,7 +39,7 @@ class App extends Component {
       <div className="app">
         {/* <Nav /> */}
         <nav className="navbar fixed-top navbar-expand-lg">
-            <a className="navbar-brand" href="#"><img className="navbar-logo" src="../NYPD.png" alt=""></img> NYPD CrashSearch - Search Crash in NYC</a>
+            <a className="navbar-brand" href="#"><img className="navbar-logo" src="../NYPD.png" alt=""></img> NYPD CrashSearch</a>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                     <li><Link to={'/'} className="nav-link">Overview</Link></li>

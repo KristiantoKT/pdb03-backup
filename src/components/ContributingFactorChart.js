@@ -46,7 +46,7 @@ class ContributingFactorChart extends Component {
                     <YAxis />
                     <Tooltip />
                     {/* <Legend /> */}
-                    <Bar dataKey="doc_count" isAnimationActive={false} fill="#5B86E5"></Bar>
+                    <Bar dataKey="doc_count" isAnimationActive={false} fill="#444e86"></Bar>
                 </BarChart>
 
             </div>
