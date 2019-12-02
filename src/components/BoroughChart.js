@@ -20,7 +20,7 @@ class BoroughChart extends Component {
                 }
             }
         };
-        
+
         const response = await axios.get('http://35.193.23.202:9200/accident/_search', {
             params: {
                 source: JSON.stringify(query),
@@ -55,13 +55,13 @@ class BoroughChart extends Component {
         }
         return (
             <div>
-                <PieChart width={730} height={250}>
+                <PieChart width={500} height={250}>
                     <Pie data={this.state.borough} dataKey="doc_count" nameKey="key" cx="50%" cy="50%" fill="#ff0000" label labelLine isAnimationActive={false}>
                     {
                         this.state.borough.map((entry, index) => <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />)
                     }
                     </Pie>
-                    <Legend verticalAlign="top" height={36} />
+                    <Legend verticalAlign="bottom" align="center" layout="horizontal" iconSize={12} iconType="circle"/>
                 </PieChart>
             </div>
         );

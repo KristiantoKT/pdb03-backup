@@ -41,10 +41,17 @@ export default class Overview extends Component {
 						</div>
 					</div>
 					<div className="row">
-						<div className="col-md-3">
-							<BoroughChart />
-
+						<div className="col-md-6">
+							<div className="card card-overview">
+								<div className="card-body">
+									<h5 className="card-title">Number of Crash based on Borough</h5>
+									<BoroughChart />
+								</div>
+							</div>
 						</div>
+					</div>
+					<div className="row">
+						<Maps />
 					</div>
 			</div>
 		);
