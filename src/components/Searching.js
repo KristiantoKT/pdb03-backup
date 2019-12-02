@@ -1,93 +1,55 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import Overview from './components/Overview';
-import Searching from './components/Searching'
 import {
-  ReactiveBase,
-  DataSearch,
-  MultiList,
-  DateRange,
-  SelectedFilters,
-  NumberBox,
-  ReactiveList,
+    ReactiveBase,
+    DataSearch,
+    MultiList,
+    DateRange,
+    SelectedFilters,
+    NumberBox,
+    ReactiveList,
+  
+  } from "@appbaseio/reactivesearch";
 
-} from "@appbaseio/reactivesearch";
-import "./App.css";
-import Maps from './components/Maps';
-import Nav from "./components/Nav";
+class Searching extends Component {
+    constructor(props) {
+			super(props);
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isClicked: false,
-      message: "🔬Show Filters"
-    };
-  }
-
-  handleClick() {
+			this.state = {
+					isClicked: false,
+					message: "🔬Show Filters"
+			};
+    }
+    
+    handleClick() {
     this.setState({
-      isClicked: !this.state.isClicked,
-      message: this.state.isClicked ? "🔬 Show Filters" : "Show Maps"
+        isClicked: !this.state.isClicked,
+        message: this.state.isClicked ? "🔬 Show Filters" : "Show Maps"
     });
-  }
+    }
 
-  render() {
-    return (
-      <Router>
-      <div className="app">
-        {/* <Nav /> */}
-        <nav className="navbar fixed-top navbar-expand-lg">
-            <a className="navbar-brand" href="#"><img className="navbar-logo" src="../NYPD.png" alt=""></img> NYPD CrashSearch - Search Crash in NYC</a>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav mr-auto">
-                    <li><Link to={'/'} className="nav-link">Overview</Link></li>
-                    <li><Link to={'/search'} className="nav-link">Search</Link></li>
-                </ul>
-            </div>
-        </nav>
-        {/* <div className="overview-container">
-          <div className="row">
-            <div className="col-md-12">
-              <h2 className="section-title">Crash Overview</h2>
-            </div>
-            <div className="col-md-6 overview-subtitle">
-              <h3>Crash Infographic</h3>
-            </div>
-            <div className="col-md-6 crash-map overview-subtitle">
-              <h3>Crash Map</h3>
-              <Maps />
-            </div>
-          </div>
-        </div>
-
-        <div className="main-container">
-          <ReactiveBase
-            app="accident"
-            url="http://35.193.23.202:9200"
-            theme={{
-              typography: {
-                fontFamily:
-                  '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif',
-                fontSize: "16px"
-              },
-              colors: {
-                textColor: "#fff",
-                backgroundColor: "#212121",
-                primaryTextColor: "#fff",
-                primaryColor: "#2196F3",
-                titleColor: "#fff",
-                alertColor: "#d9534f",
-                borderColor: "#666"
-              }
-            }}
-          >
+    render() {
+        return (
+        <div className="container" id="searchContainer">
+					<ReactiveBase app="accident" url="http://35.193.23.202:9200" 
+					// theme={{
+					// 	colors: {
+					// 		// textColor: "#000",
+					// 		// backgroundColor: "#212121",
+					// 		primaryTextColor: "#fff",
+					// 		primaryColor: "#2196F3",
+					// 		titleColor: "#fff",
+					// 		alertColor: "#d9534f",
+					// 		borderColor: "#666"
+					// 	}
+					// }}
+					>
+						<div className="row">
+							<div className="col-md-12">
+								<h2 className="section-title">Crash Data Search</h2>
+							</div>
+						</div>
             <div className="row">
-              <div className="col-md-12">
-                <h2 className="section-title">Crash Search</h2>
-              </div>
-              <div className="col-md-3">
+              <div className="col-md-4">
                 <div
                   className={
                     this.state.isClicked ? "left-bar-optional" : "left-bar"
@@ -169,7 +131,7 @@ class App extends Component {
                     }}
                   />
 
-                  <hr className="blue" />
+                  <hr/>
                   <div className="filter-heading center">
                     <b>
                       <i className="fa fa-star" /> Crash Factor
@@ -194,7 +156,7 @@ class App extends Component {
                     }}
                   />
 
-                  <hr className="blue" />
+                  <hr/>
                   <div className="filter-heading center">
                     <b>
                       <i className="fa fa-star" /> Crash Date Range
@@ -218,7 +180,7 @@ class App extends Component {
                   />
                 </div>
               </div>
-              <div className="col-md-9">
+              <div className="col-md-8">
                 <DataSearch
                   componentId="Location"
                   dataField={["BOROUGH", "ON STREET NAME", "OFF STREET NAME", "CROSS STREET NAME"]}
@@ -267,9 +229,8 @@ class App extends Component {
 
                     ]
                   }}
-                  // render={({ data })}
                   renderItem={(res) =>
-                    <div className="card">
+                    <div className="card search-result-card">
                       <div className="card-body">
                         <h3 className="card-title">Collision ID: {res['COLLISION_ID']}</h3>
                         <h6 className="card-subtitle">Happened: {res['ACCIDENT DATE']}, {res['ACCIDENT TIME']}</h6>
@@ -286,14 +247,9 @@ class App extends Component {
               </div>
             </div>
           </ReactiveBase >
-        </div > */}
-        <Switch>
-          <Route exact path="/" component={Overview} />
-          <Route path="/search" component={Searching} />
-        </Switch>
-      </div>
-      </Router>
-    );
-  }
+        </div>
+        );
+    }
 }
-export default App;
+
+export default Searching;

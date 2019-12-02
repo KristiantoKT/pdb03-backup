@@ -50,18 +50,21 @@ export default class Maps extends Component {
       selectedMarker: false
     }
   }
+
   async componentDidMount() {
-    await axios.get('http://35.193.23.202:9200/accident/_search?size=500', 
-      {	
-        "sort":[{
-          "ACCIDENT DATE": {
-            "order": "desc"
-          }
-        }]
+    const query = {	
+      "sort":[{
+        "ACCIDENT DATE": {
+          "order": "desc"
+        }
+      }]
+    }
+    await axios.get('http://35.193.23.202:9200/accident/_search?size=250', {
+      params: {
+        source: JSON.stringify(query),
+        source_content_type: 'application/json'
       }
-    )
-    .then((response) => {
-      console.log(response);
+    }).then((response) => {
       this.setState({crashes : response.data.hits.hits});
     });
   }
