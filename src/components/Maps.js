@@ -51,9 +51,18 @@ export default class Maps extends Component {
     }
   }
   async componentDidMount() {
-    await axios.get('http://35.193.23.202:9200/accident/_search?size=500')
+    await axios.get('http://35.193.23.202:9200/accident/_search?size=500', 
+      {	
+        "sort":[{
+          "ACCIDENT DATE": {
+            "order": "desc"
+          }
+        }]
+      }
+    )
     .then((response) => {
-        this.setState({crashes : response.data.hits.hits});
+      console.log(response);
+      this.setState({crashes : response.data.hits.hits});
     });
   }
 
@@ -69,7 +78,7 @@ export default class Maps extends Component {
         onClick={this.handleClick}
         googleMapURL="https://maps.googleapis.com/maps/api/js?v=weekly&key=AIzaSyBTJ6zgwgltbRXG980oIUIBmFug3e3j2SE"
         loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `750px`, width: `750px` }} />}
+        containerElement={<div style={{ height: `500px`, width: `100%` }} />}
         mapElement={<div style={{ height: `100%` }} />}
       />
     )
