@@ -6,9 +6,8 @@ import {
     DateRange,
     SelectedFilters,
     NumberBox,
-    ReactiveList,
-  
-  } from "@appbaseio/reactivesearch";
+		ReactiveList
+} from "@appbaseio/reactivesearch";
 
 class Searching extends Component {
     constructor(props) {
@@ -25,7 +24,7 @@ class Searching extends Component {
         isClicked: !this.state.isClicked,
         message: this.state.isClicked ? "🔬 Show Filters" : "Show Maps"
     });
-    }
+		}
 
     render() {
         return (
@@ -229,9 +228,9 @@ class Searching extends Component {
                       "Crash Range Date"
 
                     ]
-                  }}
-                  renderItem={(res) =>
-                    <div className="card search-result-card">
+									}}
+									renderItem={(res) =>
+                    <div className="card search-result-card" key={res['COLLISION_ID']}>
                       <div className="card-body">
                         <h4 className="card-title search-result-card-title">Collision ID #{res['COLLISION_ID']}</h4>
                         <p className="card-subtitle search-result-card-subtitle">Happened on {res['ACCIDENT DATE']} at {res['ACCIDENT TIME']}</p>
@@ -240,7 +239,7 @@ class Searching extends Component {
 													<span className="search-result-borough">Borough: {res["BOROUGH"] || "UNDEFINED"}</span><br></br>
 													<span className="search-result-casualities">{res["NUMBER OF PERSONS INJURED"] + " person injured and " + res["NUMBER OF PERSONS KILLED"] + " person killed"}</span><br></br>
 													<span className="search-result-caused-by">Incident was caused by: {res["CONTRIBUTING FACTOR VEHICLE 1"]}</span>
-												</p>												
+												</p>										
                       </div>
                     </div>}
                 />
