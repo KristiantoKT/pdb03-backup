@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Maps from "./Maps";
 import axios from "axios";
 import BoroughChart from "./BoroughChart";
+import ContributingFactorChart from "./ContributingFactorChart";
 
 export default class Overview extends Component {
 	constructor(props) {
@@ -44,14 +45,23 @@ export default class Overview extends Component {
 						<div className="col-md-6">
 							<div className="card card-overview">
 								<div className="card-body">
-									<h5 className="card-title">Number of Crash based on Borough</h5>
+									<h5 className="card-title section-title">Number of Crash based on Borough</h5>
 									<BoroughChart />
 								</div>
 							</div>
 						</div>
-					</div>
-					<div className="row">
-						<Maps />
+						<div className="col-md-6">
+							<div className="card card-overview">
+								<div className="card-body">
+									<h5 className="card-title section-title">Top 5 Contributing Factor</h5>
+									<ContributingFactorChart />
+								</div>
+							</div>
+						</div>
+						<div className="col-md-12">
+							<h5 className="section-title">Latest 250 Crashes Location</h5>
+							<Maps />	
+						</div>
 					</div>
 			</div>
 		);

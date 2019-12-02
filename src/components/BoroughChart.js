@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { PieChart, Pie, Cell, Legend } from "recharts";
+import { PieChart, Pie, Cell, Legend, Tooltip } from "recharts";
 import axios from "axios";
 
 class BoroughChart extends Component {
@@ -32,12 +32,6 @@ class BoroughChart extends Component {
             borough: response.data.aggregations.borough_numbers.buckets
         });
         
-        // Change "" to UNDEFINED
-        for(let i = 0; i < this.state.borough.length; i++) {
-            if(this.state.borough[i].key === "") {
-                this.state.borough[i].key = "UNDEFINED";
-            }
-        }
     }
     
     componentDidMount() {
@@ -61,6 +55,7 @@ class BoroughChart extends Component {
                         this.state.borough.map((entry, index) => <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />)
                     }
                     </Pie>
+                    <Tooltip itemStyle={{"font-size": "14px"}} />
                     <Legend verticalAlign="bottom" align="center" layout="horizontal" iconSize={12} iconType="circle"/>
                 </PieChart>
             </div>

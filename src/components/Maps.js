@@ -65,7 +65,6 @@ export default class Maps extends Component {
         source_content_type: 'application/json'
       }
     }).then((response) => {
-      console.log(response);
       this.setState({crashes : response.data.hits.hits});
     });
   }
