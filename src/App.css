@@ -77,6 +77,12 @@ hr {
   text-align: center;
 }
 
+.card {
+  color: #000;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 /* styling for left-sidebar */
 
 .left-bar,

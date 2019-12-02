@@ -236,7 +236,7 @@ class App extends Component {
                   dataField="ACCIDENT DATE"
                   pagination
                   paginationAt="bottom"
-                  size={15}
+                  size={10}
                   sortOptions={
                     [
                       {label: "Accident Date (Descending)", dataField: "ACCIDENT DATE", sortBy:"desc"},
@@ -256,7 +256,15 @@ class App extends Component {
                   }}
                   // render={({ data })}
                   renderItem={(res) =>
-                    <div>{res['COLLISION_ID']}, {res['ACCIDENT DATE']}, {res['ACCIDENT TIME']}</div>}
+                    <div className="card">
+                      <div className="card-body">
+                        <h3 className="card-title">Collision ID: {res['COLLISION_ID']}</h3>
+                        <h6 className="card-subtitle">Happened: {res['ACCIDENT DATE']}, {res['ACCIDENT TIME']}</h6>
+                        <p>{res["ON STREET NAME"] + " " + res["CROSS STREET NAME"] + " " + res["OFF STREET NAME"] + ", " + res["BOROUGH"]}</p>
+                        <p>{res["NUMBER OF PERSONS INJURED"] + " person injured, " + res["NUMBER OF PERSONS KILLED"] + " person killed"}</p>
+                      </div>
+                      <hr></hr>
+                    </div>}
                 />
               </div>
               <button className="toggle-button" onClick={this.handleClick.bind(this)}>
