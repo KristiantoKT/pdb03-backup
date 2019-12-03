@@ -25,10 +25,10 @@ services:
       - http.cors.enabled=true
       - http.cors.allow-origin=*
       - http.cors.allow-headers=Content-Type,Access-Control-Allow-Headers,Authorization,X-Requested-With
-      # - discovery.seed_hosts=es02-pdb03
-      # - cluster.initial_master_nodes=es01-pdb03,es02-pdb03
-      - discovery.seed_hosts=es02-pdb03,es03-pdb03
-      - cluster.initial_master_nodes=es01-pdb03,es02-pdb03,es03-pdb03
+      - discovery.seed_hosts=es02-pdb03
+      - cluster.initial_master_nodes=es01-pdb03,es02-pdb03
+      # - discovery.seed_hosts=es02-pdb03,es03-pdb03
+      # - cluster.initial_master_nodes=es01-pdb03,es02-pdb03,es03-pdb03
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
@@ -48,10 +48,10 @@ services:
     environment:
       - node.name=es02-pdb03
       - cluster.name=es-pdb03
-      # - discovery.seed_hosts=es01-pdb03
-      # - cluster.initial_master_nodes=es01-pdb03,es02-pdb03
-      - discovery.seed_hosts=es01-pdb03,es03-pdb03
-      - cluster.initial_master_nodes=es01-pdb03,es02-pdb03,es03-pdb03
+      - discovery.seed_hosts=es01-pdb03
+      - cluster.initial_master_nodes=es01-pdb03,es02-pdb03
+      # - discovery.seed_hosts=es01-pdb03,es03-pdb03
+      # - cluster.initial_master_nodes=es01-pdb03,es02-pdb03,es03-pdb03
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
@@ -63,32 +63,32 @@ services:
     networks:
       - elastic
 
-  es03-pdb03:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.2
-    container_name: es03-pdb03
-    environment:
-      - node.name=es03-pdb03
-      - cluster.name=es-pdb03
-      - discovery.seed_hosts=es01-pdb03, es02-pdb03
-      - cluster.initial_master_nodes=es01-pdb03,es02-pdb03,es03-pdb03
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - data03-pdb03:/usr/share/elasticsearch/data
-    networks:
-      - elastic
+  # es03-pdb03:
+  #   image: docker.elastic.co/elasticsearch/elasticsearch:7.4.2
+  #   container_name: es03-pdb03
+  #   environment:
+  #     - node.name=es03-pdb03
+  #     - cluster.name=es-pdb03
+  #     - discovery.seed_hosts=es01-pdb03, es02-pdb03
+  #     - cluster.initial_master_nodes=es01-pdb03,es02-pdb03,es03-pdb03
+  #     - bootstrap.memory_lock=true
+  #     - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  #   ulimits:
+  #     memlock:
+  #       soft: -1
+  #       hard: -1
+  #   volumes:
+  #     - data03-pdb03:/usr/share/elasticsearch/data
+  #   networks:
+  #     - elastic
   
 volumes:
   data01-pdb03:
     driver: local
   data02-pdb03:
     driver: local
-  data03-pdb03:
-    driver: local
+  # data03-pdb03:
+  #   driver: local
   
 networks:
   elastic:
